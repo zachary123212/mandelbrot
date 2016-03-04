@@ -1,0 +1,23 @@
+{
+  "name": "mandelbrot",
+  "homepage": "https://github.com/zachary123212/mandelbrot",
+  "authors": [
+    "zachary123212 <zlindenbaum@gmail.com>"
+  ],
+  "description": "mandelbrot fractal implementation in p5js",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "p5.js": "p5js#^0.4.22"
+  }
+}
