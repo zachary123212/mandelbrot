@@ -1,12 +1,15 @@
 var DIMX = 700;
 var DIMY = 700;
 
-var mand
+var mand;
 
 function Mandelbrot() {
-  // show = function() {
-  //   for(i = 0; i < )
-  // };
+
+  this.show = function(){
+    // show = function() {
+    //   for(i = 0; i < )
+    // };
+  };
 }
 
 function setup() {
