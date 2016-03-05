@@ -3,11 +3,11 @@ var DIMY = 700;
 
 var mand;
 
-function ComplexPlane(){
-  this.maxX =  20;
-  this.minX = -20;
-  this.maxY =  20;
-  this.minY = -20;
+function ComplexPlane(range){
+  this.maxX =  range;
+  this.minX = -1 * range;
+  this.maxY =  range;
+  this.minY = -1 * range;
 
   this.origin = createVector(0,0);
 
@@ -32,16 +32,28 @@ function Mandelbrot() {
 
 function setup() {
   createCanvas(DIMX, DIMY);
-  plane = new ComplexPlane();
+  plane = new ComplexPlane(2);
   mand = new Mandelbrot();
+}
+
+function isMand(x, y){
+  tmp = math.complex(0,0);
+  for(i = 0; i < 100; i++){
+    tmp = math.add(math.pow(tmp, 2), math.complex(x,y));
+    // print(tmp);
+    if(math.norm(tmp) > 16){
+      return false;
+    }
+  }
+  return true;
 }
 
 function draw() {
   plane.initialize();
 
-  for(x = plane.minX; x < plane.maxX; x+=0.5){
-    for(y = plane.minY; y < plane.maxY; y+=0.5){
-      if(dist(x,y,0,0) < 10){
+  for(x = plane.minX; x < plane.maxX; x+=0.01){
+    for(y = plane.minY; y < plane.maxY; y+=0.01){
+      if(isMand(x,y)){
         plane.plot(x,y);
       }
     }
