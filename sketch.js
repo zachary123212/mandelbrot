@@ -2,6 +2,7 @@ var DIMX = 700;
 var DIMY = 700;
 
 var mand;
+var completed = false;
 
 function ComplexPlane(range){
   this.maxX =  range;
@@ -21,42 +22,42 @@ function ComplexPlane(range){
   };
 }
 
-function Mandelbrot() {
-
-  this.show = function(){
-    // show = function() {
-    //   for(i = 0; i < )
-    // };
-  };
-}
-
-function setup() {
-  createCanvas(DIMX, DIMY);
-  plane = new ComplexPlane(2);
-  mand = new Mandelbrot();
-}
-
 function isMand(x, y){
   tmp = math.complex(0,0);
   for(i = 0; i < 100; i++){
     tmp = math.add(math.pow(tmp, 2), math.complex(x,y));
     // print(tmp);
-    if(math.norm(tmp) > 16){
-      return false;
+    if(math.norm(tmp) > 5){
+      return i;
     }
   }
-  return true;
+  return -1;
 }
 
-function draw() {
+function setup() {
+  createCanvas(DIMX, DIMY);
+  plane = new ComplexPlane(2);
+
+  noStroke();
+
   plane.initialize();
 
-  for(x = plane.minX; x < plane.maxX; x+=0.01){
-    for(y = plane.minY; y < plane.maxY; y+=0.01){
-      if(isMand(x,y)){
-        plane.plot(x,y);
+  for(x = plane.minX; x < plane.maxX; x+=0.005){
+    for(y = plane.minY; y < plane.maxY; y+=0.005){
+      val = isMand(x,y);
+      if(val < 0){
+        fill(0);
+      } else {
+        fill(color('hsb('+Math.floor(map(val, 0, 10, 0, 255))+', 100%, 50%)'));
+        // fill(color(map(val, 0, 10, 0, 255)));
       }
+      plane.plot(x,y);
     }
   }
-  mand.show();
+}
+
+
+
+function draw() {
+
 }
